@@ -1,0 +1,1 @@
+# MindCareAI app package
