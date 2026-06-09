@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     RATE_LIMIT_PER_MINUTE: int = 60
 
     # CORS
-    CORS_ORIGINS: Union[str, List[str]] = "http://localhost:5173,http://127.0.0.1:5173"
+    CORS_ORIGINS: Union[str, List[str]] = "http://localhost:5173,http://127.0.0.1:5173,https://*.vercel.app,https://*.hf.space"
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod

@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from app.config.settings import settings
 from app.middleware.security import setup_security_middleware
 from app.middleware.rate_limiter import setup_rate_limiter
@@ -30,6 +31,11 @@ def startup_event():
     logger.info(f"Host: {settings.HOST} | Port: {settings.PORT}")
     logger.info(f"Database Mode: {'Mock Storage (No credentials)' if is_mock else 'Firebase Cloud Firestore'}")
     logger.info("==================================================")
+
+@app.get("/", include_in_schema=False)
+def root():
+    """Redirect root to API docs (also satisfies HF Spaces health probe)."""
+    return RedirectResponse(url="/docs")
 
 @app.get("/health", tags=["Health"])
 def health_check():
